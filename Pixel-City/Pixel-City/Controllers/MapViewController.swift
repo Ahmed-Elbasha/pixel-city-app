@@ -9,12 +9,14 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import MapKit
 
 class MapViewController: UIViewController {
 
+    @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        mapView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,6 +24,11 @@ class MapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    @IBAction func centerMapButtonWasPressed(_ sender: Any) {
+    }
+    
 }
 
+extension MapViewController: MKMapViewDelegate {
+
+}

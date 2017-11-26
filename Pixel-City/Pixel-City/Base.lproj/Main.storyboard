@@ -8,6 +8,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AvenirNext.ttc">
+            <string>AvenirNext-DemiBold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -16,12 +21,79 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGe-AS-2Ju">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="667" id="L20-YJ-zAc"/>
+                                </constraints>
+                            </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5RP-9J-MDY">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Double tap to drop a pin and view photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LlS-xk-GVj">
+                                        <rect key="frame" x="26" y="25" width="324" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="324" id="WUw-xa-Ycb"/>
+                                            <constraint firstAttribute="height" constant="21" id="z7K-j2-AuX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96470588235294119" green="0.65098039215686276" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="AhC-Rt-1pC"/>
+                                    <constraint firstItem="LlS-xk-GVj" firstAttribute="centerX" secondItem="5RP-9J-MDY" secondAttribute="centerX" id="B7A-kg-gKp"/>
+                                    <constraint firstItem="LlS-xk-GVj" firstAttribute="centerY" secondItem="5RP-9J-MDY" secondAttribute="centerY" id="V18-nD-Kcj"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XVc-Sr-cbS">
+                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoc-ZL-5N7">
+                                <rect key="frame" x="292" y="580" width="67" height="67"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="67" id="NWa-9m-5aa"/>
+                                    <constraint firstAttribute="height" constant="67" id="QVQ-lX-D9d"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="locationButton"/>
+                                <connections>
+                                    <action selector="centerMapButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aJT-IF-N2g"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hoc-ZL-5N7" secondAttribute="trailing" constant="16" id="0QX-Ml-Wcd"/>
+                            <constraint firstItem="oGe-AS-2Ju" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="45e-XC-jyZ"/>
+                            <constraint firstItem="5RP-9J-MDY" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="5SD-Z8-nVw"/>
+                            <constraint firstItem="XVc-Sr-cbS" firstAttribute="top" secondItem="oGe-AS-2Ju" secondAttribute="bottom" id="Nay-dt-MW8"/>
+                            <constraint firstAttribute="trailing" secondItem="XVc-Sr-cbS" secondAttribute="trailing" id="QfS-Mb-ZGM"/>
+                            <constraint firstItem="oGe-AS-2Ju" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="SMi-sF-uvN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hoc-ZL-5N7" secondAttribute="bottom" constant="20" id="Tyw-mD-0DL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hoc-ZL-5N7" secondAttribute="trailing" constant="16" id="j0P-zl-0GY"/>
+                            <constraint firstItem="XVc-Sr-cbS" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="lJO-cs-hvn"/>
+                            <constraint firstItem="XVc-Sr-cbS" firstAttribute="top" secondItem="hoc-ZL-5N7" secondAttribute="bottom" constant="20" id="oLt-ea-pww"/>
+                            <constraint firstItem="5RP-9J-MDY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="rAe-1d-79B"/>
+                            <constraint firstItem="XVc-Sr-cbS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ta4-OV-DOQ"/>
+                            <constraint firstItem="5RP-9J-MDY" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="wTW-ZL-9bF"/>
+                            <constraint firstItem="oGe-AS-2Ju" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zAo-m4-3zC"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="oGe-AS-2Ju" id="sBT-3o-dx3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="117.59999999999999" y="118.29085457271366"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="locationButton" width="67" height="67"/>
+    </resources>
 </document>
