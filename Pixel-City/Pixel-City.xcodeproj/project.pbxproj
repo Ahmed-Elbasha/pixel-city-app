@@ -12,6 +12,7 @@
 		7E77082A1FC725EE0084EC01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E7708281FC725EE0084EC01 /* Main.storyboard */; };
 		7E77082C1FC725EE0084EC01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E77082B1FC725EE0084EC01 /* Assets.xcassets */; };
 		7E77082F1FC725EE0084EC01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E77082D1FC725EE0084EC01 /* LaunchScreen.storyboard */; };
+		7ED92C4A1FD18096007CC5A4 /* DroppablePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED92C491FD18096007CC5A4 /* DroppablePin.swift */; };
 		E6F19C6C873345A66A781D10 /* Pods_Pixel_City.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3CE1E0A85EE27AEEA85971 /* Pods_Pixel_City.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		7E77082B1FC725EE0084EC01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E77082E1FC725EE0084EC01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7E7708301FC725EE0084EC01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7ED92C491FD18096007CC5A4 /* DroppablePin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppablePin.swift; sourceTree = "<group>"; };
 		E359C7940A62C588FC8AE99E /* Pods-Pixel-City.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixel-City.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pixel-City/Pods-Pixel-City.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,9 +72,9 @@
 		7E7708231FC725EE0084EC01 /* Pixel-City */ = {
 			isa = PBXGroup;
 			children = (
-				7E7708391FC729C30084EC01 /* Utilities */,
-				7E7708381FC729A40084EC01 /* Extensions */,
-				7E7708371FC729340084EC01 /* Views */,
+				7ED92C481FD18076007CC5A4 /* Utilities */,
+				7ED92C461FD18040007CC5A4 /* Extensions */,
+				7ED92C451FD18035007CC5A4 /* Views */,
 				7E7708361FC7291A0084EC01 /* Controllers */,
 				7E7708241FC725EE0084EC01 /* AppDelegate.swift */,
 				7E7708281FC725EE0084EC01 /* Main.storyboard */,
@@ -91,21 +93,22 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		7E7708371FC729340084EC01 /* Views */ = {
+		7ED92C451FD18035007CC5A4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7ED92C491FD18096007CC5A4 /* DroppablePin.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		7E7708381FC729A40084EC01 /* Extensions */ = {
+		7ED92C461FD18040007CC5A4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		7E7708391FC729C30084EC01 /* Utilities */ = {
+		7ED92C481FD18076007CC5A4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -252,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E7708271FC725EE0084EC01 /* MapViewController.swift in Sources */,
+				7ED92C4A1FD18096007CC5A4 /* DroppablePin.swift in Sources */,
 				7E7708251FC725EE0084EC01 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

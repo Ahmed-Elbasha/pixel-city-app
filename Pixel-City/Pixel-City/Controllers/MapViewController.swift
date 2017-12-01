@@ -24,6 +24,14 @@ class MapViewController: UIViewController {
         mapView.delegate = self
         locationManager.delegate = self
         configureLocationServices()
+        addDoubleTap()
+    }
+
+    func addDoubleTap() {
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(dropPin(sender:)))
+        doubleTap.numberOfTapsRequired = 2
+        doubleTap.delegate = self
+        mapView.addGestureRecognizer(doubleTap)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,6 +53,25 @@ extension MapViewController: MKMapViewDelegate {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
     }
+
+    @objc func dropPin(sender: UITapGestureRecognizer) {
+       removePin()
+        
+       let touchPoint = sender.location(in: mapView)
+       let touchCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+
+       let Annotation = DroppablePin(coordinate: touchCoordinate, identifier: "DroppablePin")
+       mapView.addAnnotation(Annotation)
+
+       let coordinateRegion = MKCoordinateRegionMakeWithDistance(touchCoordinate, regionRadius * 2.0, regionRadius * 2.0)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+
+    func removePin() {
+        for annotation in mapView.annotations {
+            mapView.removeAnnotation(annotation)
+        }
+    }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -62,6 +89,8 @@ extension MapViewController: CLLocationManagerDelegate {
 
 }
 
-
+extension MapViewController: UIGestureRecognizerDelegate {
+    
+}
 
 
