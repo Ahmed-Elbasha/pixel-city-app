@@ -15,10 +15,18 @@ import CoreLocation
 class MapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var pullUpViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pullUpView: UIView!
+    
     var locationManager = CLLocationManager()
     let authorizationStatus = CLLocationManager.authorizationStatus()
     let regionRadius: Double = 1000
-
+    
+    var screen = UIScreen.main.bounds
+    
+    var spinner: UIActivityIndicatorView?
+    var progressLabel: UILabel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -32,6 +40,35 @@ class MapViewController: UIViewController {
         doubleTap.numberOfTapsRequired = 2
         doubleTap.delegate = self
         mapView.addGestureRecognizer(doubleTap)
+    }
+    
+    func addSwipe() {
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(animateViewDown))
+        swipe.direction = .down
+        pullUpView.addGestureRecognizer(swipe)
+    }
+    
+    func animateViewUp() {
+        self.pullUpViewHeightConstraint.constant = 300
+        UIView.animate(withDuration: 0.03) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func animateViewDown() {
+        self.pullUpViewHeightConstraint.constant = 0
+        UIView.animate(withDuration: 0.03) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func addSpinner() {
+        spinner = UIActivityIndicatorView()
+        spinner?.center = CGPoint(x: (screen.width / 2)  - ((spinner?.frame.width)! / 2), y: 150)
+        spinner?.activityIndicatorViewStyle = .whiteLarge
+        spinner?.color = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        spinner?.startAnimating()
+        pullUpView.addSubview(spinner!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,6 +105,9 @@ extension MapViewController: MKMapViewDelegate {
 
     @objc func dropPin(sender: UITapGestureRecognizer) {
        removePin()
+       animateViewUp()
+       addSwipe()
+       addSpinner()
         
        let touchPoint = sender.location(in: mapView)
        let touchCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)

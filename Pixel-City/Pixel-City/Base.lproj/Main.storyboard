@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,10 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGe-AS-2Ju">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="667" id="L20-YJ-zAc"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="666"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5RP-9J-MDY">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
@@ -50,14 +47,17 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XVc-Sr-cbS">
-                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="666" width="375" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="wNH-zM-2Xo"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoc-ZL-5N7">
-                                <rect key="frame" x="292" y="580" width="67" height="67"/>
+                                <rect key="frame" x="309" y="596" width="50" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="67" id="NWa-9m-5aa"/>
-                                    <constraint firstAttribute="height" constant="67" id="QVQ-lX-D9d"/>
+                                    <constraint firstAttribute="width" constant="50" id="NWa-9m-5aa"/>
+                                    <constraint firstAttribute="height" constant="50" id="QVQ-lX-D9d"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="locationButton"/>
                                 <connections>
@@ -68,24 +68,24 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hoc-ZL-5N7" secondAttribute="trailing" constant="16" id="0QX-Ml-Wcd"/>
-                            <constraint firstItem="oGe-AS-2Ju" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="45e-XC-jyZ"/>
+                            <constraint firstItem="XVc-Sr-cbS" firstAttribute="top" secondItem="hoc-ZL-5N7" secondAttribute="bottom" constant="20" id="1aR-3a-yYi"/>
+                            <constraint firstItem="oGe-AS-2Ju" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4Xv-Tv-hg8"/>
                             <constraint firstItem="5RP-9J-MDY" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="5SD-Z8-nVw"/>
-                            <constraint firstItem="XVc-Sr-cbS" firstAttribute="top" secondItem="oGe-AS-2Ju" secondAttribute="bottom" id="Nay-dt-MW8"/>
+                            <constraint firstAttribute="bottom" secondItem="XVc-Sr-cbS" secondAttribute="bottom" id="5uh-Fi-spq"/>
+                            <constraint firstAttribute="trailing" secondItem="oGe-AS-2Ju" secondAttribute="trailing" id="JsG-vk-F8e"/>
                             <constraint firstAttribute="trailing" secondItem="XVc-Sr-cbS" secondAttribute="trailing" id="QfS-Mb-ZGM"/>
                             <constraint firstItem="oGe-AS-2Ju" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="SMi-sF-uvN"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hoc-ZL-5N7" secondAttribute="bottom" constant="20" id="Tyw-mD-0DL"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hoc-ZL-5N7" secondAttribute="trailing" constant="16" id="j0P-zl-0GY"/>
-                            <constraint firstItem="XVc-Sr-cbS" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="lJO-cs-hvn"/>
-                            <constraint firstItem="XVc-Sr-cbS" firstAttribute="top" secondItem="hoc-ZL-5N7" secondAttribute="bottom" constant="20" id="oLt-ea-pww"/>
+                            <constraint firstItem="XVc-Sr-cbS" firstAttribute="top" secondItem="oGe-AS-2Ju" secondAttribute="bottom" id="l4k-c0-NWv"/>
                             <constraint firstItem="5RP-9J-MDY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="rAe-1d-79B"/>
                             <constraint firstItem="XVc-Sr-cbS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ta4-OV-DOQ"/>
                             <constraint firstItem="5RP-9J-MDY" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="wTW-ZL-9bF"/>
-                            <constraint firstItem="oGe-AS-2Ju" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zAo-m4-3zC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="oGe-AS-2Ju" id="sBT-3o-dx3"/>
+                        <outlet property="pullUpView" destination="XVc-Sr-cbS" id="aFO-t3-K6h"/>
+                        <outlet property="pullUpViewHeightConstraint" destination="wNH-zM-2Xo" id="Sx8-5h-hMg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
