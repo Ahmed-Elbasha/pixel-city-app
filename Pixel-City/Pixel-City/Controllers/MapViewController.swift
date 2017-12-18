@@ -31,6 +31,7 @@ class MapViewController: UIViewController {
     var collectionView: UICollectionView?
     
     var imageUrlArray = [String]()
+    var imageArray = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +72,7 @@ class MapViewController: UIViewController {
     }
     
     @objc func animateViewDown() {
+        cancelAllSessions()
         self.pullUpViewHeightConstraint.constant = 0
         UIView.animate(withDuration: 0.03) {
             self.view.layoutIfNeeded()
@@ -89,7 +91,7 @@ class MapViewController: UIViewController {
     func addProgressLabel() {
         progressLabel = UILabel()
         progressLabel?.frame = CGRect(x: (screen.width / 2) - 120 , y: 175, width: 240, height: 40)
-        progressLabel?.font = UIFont(name: "Avenir Next", size: 18)
+        progressLabel?.font = UIFont(name: "Avenir Next", size: 14)
         progressLabel?.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         progressLabel?.textAlignment = .center
         collectionView?.addSubview(progressLabel!)
@@ -118,6 +120,43 @@ class MapViewController: UIViewController {
         }
     }
     
+    func retrieveUrls(forAnnotation annotation: DroppablePin, handler: @escaping ( _ status: Bool) -> () ) {
+        imageUrlArray = []
+        
+        Alamofire.request(FlickrUrl(forApiKey: apikey, withAnnotation: annotation, andNumberOfPhotos: 40)).responseJSON { (response) in
+            guard let json = response.result.value as? Dictionary<String,AnyObject> else { return }
+            let photoDictionary = json["photos"] as! Dictionary<String,AnyObject>
+            let photoDictionaryArray = photoDictionary["photo"] as! [Dictionary<String,AnyObject>]
+            for photo in photoDictionaryArray {
+                let postUrl = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!)_h_d.jpg"
+                self.imageUrlArray.append(postUrl)
+            }
+            handler(true)
+        }
+    }
+    
+    func retrieveImages(handler: @escaping (_ status: Bool) -> ()) {
+        imageArray = []
+        
+        for url in imageUrlArray {
+            Alamofire.request(url).responseImage(completionHandler: { (response) in
+                guard let image = response.result.value else { return }
+                self.imageArray.append(image)
+                self.progressLabel?.text = "\(self.imageArray.count)/40 PHOTOS DOWNLOADED"
+                
+                if self.imageArray.count == self.imageUrlArray.count {
+                    handler(true)
+                }
+            })
+        }
+    }
+    
+    func cancelAllSessions() {
+        Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionDataTask, uploadTask, downloadTask) in
+            sessionDataTask.forEach({ $0.cancel() })
+            downloadTask.forEach({ $0.cancel() })
+        }
+    }
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -143,6 +182,7 @@ extension MapViewController: MKMapViewDelegate {
        removePin()
        removeSpinner()
        removeProgressLabel()
+       cancelAllSessions()
        
        animateViewUp()
        addSwipe()
@@ -158,8 +198,18 @@ extension MapViewController: MKMapViewDelegate {
        let coordinateRegion = MKCoordinateRegionMakeWithDistance(touchCoordinate, regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
         
-        retrieveUrls(forAnnotation: Annotation) { (true) in
-            print(self.imageUrlArray)
+        retrieveUrls(forAnnotation: Annotation) { (finished) in
+            if finished {
+                self.retrieveImages(handler: { (finished) in
+                    if finished {
+                        //Remove spinner.
+                        self.removeSpinner()
+                        //Remove progressLabel.
+                        self.removeProgressLabel()
+                        //Reload CollectionView.
+                    }
+                })
+            }
         }
     }
 
@@ -168,6 +218,8 @@ extension MapViewController: MKMapViewDelegate {
             mapView.removeAnnotation(annotation)
         }
     }
+    
+    
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -182,22 +234,6 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         centerMapsOnUserLocation()
     }
-    
-    func retrieveUrls(forAnnotation annotation: DroppablePin, handler: @escaping ( _ status: Bool) -> () ) {
-        imageUrlArray = []
-        
-        Alamofire.request(FlickrUrl(forApiKey: apikey, withAnnotation: annotation, andNumberOfPhotos: 40)).responseJSON { (response) in
-            guard let json = response.result.value as? Dictionary<String,AnyObject> else { return }
-            let photoDictionary = json["photos"] as! Dictionary<String,AnyObject>
-            let photoDictionaryArray = photoDictionary["photo"] as! [Dictionary<String,AnyObject>]
-            for photo in photoDictionaryArray {
-                let postUrl = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!)_h_d.jpg"
-                self.imageUrlArray.append(postUrl)
-            }
-            handler(true)
-        }
-    }
-
 }
 
 extension MapViewController: UIGestureRecognizerDelegate {
