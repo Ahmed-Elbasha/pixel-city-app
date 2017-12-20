@@ -47,7 +47,7 @@ class MapViewController: UIViewController {
         collectionView?.register(PhotoCell.self, forCellWithReuseIdentifier: "photoCell")
         collectionView?.delegate = self
         collectionView?.dataSource = self
-        collectionView?.backgroundColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
+        collectionView?.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         pullUpView.addSubview(collectionView!)
     }
 
@@ -121,8 +121,6 @@ class MapViewController: UIViewController {
     }
     
     func retrieveUrls(forAnnotation annotation: DroppablePin, handler: @escaping ( _ status: Bool) -> () ) {
-        imageUrlArray = []
-        
         Alamofire.request(FlickrUrl(forApiKey: apikey, withAnnotation: annotation, andNumberOfPhotos: 40)).responseJSON { (response) in
             guard let json = response.result.value as? Dictionary<String,AnyObject> else { return }
             let photoDictionary = json["photos"] as! Dictionary<String,AnyObject>
@@ -136,8 +134,6 @@ class MapViewController: UIViewController {
     }
     
     func retrieveImages(handler: @escaping (_ status: Bool) -> ()) {
-        imageArray = []
-        
         for url in imageUrlArray {
             Alamofire.request(url).responseImage(completionHandler: { (response) in
                 guard let image = response.result.value else { return }
@@ -184,6 +180,11 @@ extension MapViewController: MKMapViewDelegate {
        removeProgressLabel()
        cancelAllSessions()
        
+       imageUrlArray = []
+       imageArray = []
+       
+       collectionView?.reloadData()
+        
        animateViewUp()
        addSwipe()
        addSpinner()
@@ -207,6 +208,7 @@ extension MapViewController: MKMapViewDelegate {
                         //Remove progressLabel.
                         self.removeProgressLabel()
                         //Reload CollectionView.
+                        self.collectionView?.reloadData()
                     }
                 })
             }
@@ -247,13 +249,15 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // returns number of items in an array
-        return 4
+        return imageArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as? PhotoCell
-        
-        return cell!
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as? PhotoCell else { return UICollectionViewCell() }
+        let imageFromIndexPath = imageArray[indexPath.row]
+        let imageView = UIImageView(image: imageFromIndexPath)
+        cell.addSubview(imageView)
+        return cell
     }
 }
 
