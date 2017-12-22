@@ -21,6 +21,7 @@ class PopViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popImageView.image = self.passedImage
+        addDoubleTap()
     }
 
     override func didReceiveMemoryWarning() {
