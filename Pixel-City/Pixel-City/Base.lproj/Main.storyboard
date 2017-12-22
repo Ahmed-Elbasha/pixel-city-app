@@ -92,6 +92,52 @@
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="118.29085457271366"/>
         </scene>
+        <!--Pop View Controller-->
+        <scene sceneID="Pg5-fN-dbB">
+            <objects>
+                <viewController storyboardIdentifier="PopVC" id="25e-Rd-7qi" customClass="PopViewController" customModule="Pixel_City" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yyn-x9-ios">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gtz-Mw-9lG">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q9a-uY-gi8">
+                                <rect key="frame" x="87.5" y="622" width="200" height="25"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Double-Tap to dismiss" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeD-8C-Otk">
+                                        <rect key="frame" x="13.5" y="1" width="173" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="1Ud-WV-SlL"/>
+                                    <constraint firstAttribute="height" constant="25" id="3uF-Of-ghD"/>
+                                    <constraint firstItem="QeD-8C-Otk" firstAttribute="centerY" secondItem="Q9a-uY-gi8" secondAttribute="centerY" id="G4g-rL-b7t"/>
+                                    <constraint firstItem="QeD-8C-Otk" firstAttribute="centerX" secondItem="Q9a-uY-gi8" secondAttribute="centerX" id="rBz-Zu-9uX"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Q9a-uY-gi8" firstAttribute="centerX" secondItem="yyn-x9-ios" secondAttribute="centerX" id="RGc-1R-CMo"/>
+                            <constraint firstItem="guH-ad-djs" firstAttribute="bottom" secondItem="Q9a-uY-gi8" secondAttribute="bottom" constant="20" id="uWC-Ss-OfF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="guH-ad-djs"/>
+                    </view>
+                    <connections>
+                        <outlet property="popImageView" destination="Gtz-Mw-9lG" id="IeC-qV-rvm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cgm-nh-ZUZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="946.39999999999998" y="118.29085457271366"/>
+        </scene>
     </scenes>
     <resources>
         <image name="locationButton" width="67" height="67"/>
