@@ -40,6 +40,8 @@ class MapViewController: UIViewController {
         configureLocationServices()
         addDoubleTap()
         addCollectiovView()
+        
+        registerForPreviewing(with: self, sourceView: collectionView!)
     }
     
     func addCollectiovView() {
@@ -267,7 +269,22 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     }
 }
 
-
+extension MapViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = collectionView?.indexPathForItem(at: location), let cell = collectionView?.cellForItem(at: indexPath) else {return nil}
+        
+        guard let popVC = storyboard?.instantiateViewController(withIdentifier: "PopVC") as? PopViewController else {return nil}
+        
+        previewingContext.sourceRect = cell.contentView.frame
+        return popVC
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
+    }
+    
+    
+}
 
 
 
