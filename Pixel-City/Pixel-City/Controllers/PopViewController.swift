@@ -20,6 +20,7 @@ class PopViewController: UIViewController, UIGestureRecognizerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // sets the passed image as a value for popImageView.
         self.popImageView.image = self.passedImage
         addDoubleTap()
     }
@@ -40,6 +41,7 @@ class PopViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     */
 
+    // adds UITapGestureRecognizer
     func addDoubleTap() {
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(screenDoubleTapped))
         doubleTap.numberOfTapsRequired = 2
@@ -47,6 +49,7 @@ class PopViewController: UIViewController, UIGestureRecognizerDelegate {
         view.addGestureRecognizer(doubleTap)
     }
     
+    // dismisses the UIViewController when we double tap occured.
     @objc func screenDoubleTapped() {
         dismiss(animated: true, completion: nil)
     }

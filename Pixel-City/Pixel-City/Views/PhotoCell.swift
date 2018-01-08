@@ -10,6 +10,7 @@ import UIKit
 
 class PhotoCell: UICollectionViewCell {
     
+    // initializes a PhotoCell object.
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
